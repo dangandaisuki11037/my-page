@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🌲 김동현의 숲속 아지트에 오신 것을 환영합니다! 🐾</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            forest: {
+              50: '#f2f9f1',
+              100: '#e1f2df',
+              200: '#c5e5c2',
+              300: '#9bcd97',
+              400: '#6eb069',
+              500: '#4d9348',
+              600: '#3a7536',
+              700: '#2e5d2c',
+              800: '#274b25',
+              900: '#213f20',
+            },
+            bark: {
+              100: '#f5efe6',
+              500: '#8c6d46',
+              800: '#4a3728',
+            }
+          },
+          keyframes: {
+            bounceSlow: {
+              '0%, 100%': { transform: 'translateY(0) rotate(0deg)' },
+              '50%': { transform: 'translateY(-18px) rotate(3deg)' },
+            },
+            sparkleFade: {
+              '0%': { transform: 'scale(0) rotate(0deg)', opacity: '1' },
+              '100%': { transform: 'scale(1.5) rotate(180deg)', opacity: '0' }
+            },
+            confetti: {
+              '0%': { transform: 'translateY(0) rotate(0deg)', opacity: '1' },
+              '100%': { transform: 'translateY(200px) rotate(720deg)', opacity: '0' }
+            }
+          },
+          animation: {
+            bounceSlow: 'bounceSlow 1.8s infinite ease-in-out',
+            sparkle: 'sparkleFade 0.8s ease-out forwards',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Gowun+Dodum&display=swap');
+
+    body {
+      font-family: 'Gowun Dodum', sans-serif;
+      overflow-x: hidden;
+      transition: background-color 0.4s, color 0.4s;
+    }
+
+    .font-cute {
+      font-family: 'Gaegu', cursive;
+    }
+
+    /* 카드 뒤집기 스타일 */
+    .perspective-1000 {
+      perspective: 1000px;
+    }
+    .transform-style-3d {
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .rotate-y-180 {
+      transform: rotateY(180deg);
+    }
+    .backface-hidden {
+      backface-visibility: hidden;
+    }
+
+    /* 마우스 트레일 이펙트 */
+    .sparkle-particle {
+      position: absolute;
+      pointer-events: none;
+      z-index: 9999;
+      font-size: 16px;
+      animation: sparkleFade 0.7s forwards ease-out;
+    }
+
+    /* 나무 텍스처 느낌 패널 */
+    .wood-card {
+      box-shadow: 0 10px 25px -5px rgba(46, 93, 44, 0.15), 0 8px 10px -6px rgba(46, 93, 44, 0.1);
+    }
+  </style>
+</head>
+<body class="bg-forest-50 text-forest-900 dark:bg-zinc-900 dark:text-emerald-100 min-h-screen relative flex flex-col items-center">
+
+  <!-- 다크/라이트 모드 토글 버튼 -->
+  <button id="themeToggle" class="fixed top-4 right-4 z-50 p-3 rounded-full bg-emerald-200 dark:bg-zinc-700 text-forest-800 dark:text-emerald-300 shadow-lg hover:scale-110 active:scale-95 transition" aria-label="테마 변경">
+    <span id="themeIcon" class="text-2xl">🌙</span>
+  </button>
+
+  <!-- 메인 헤더 & 애니메이션 별명 -->
+  <header class="w-full max-w-4xl pt-12 pb-6 text-center px-4">
+    <div class="inline-block bg-forest-200 dark:bg-emerald-950 px-6 py-2 rounded-full text-forest-700 dark:text-emerald-300 font-bold mb-4 shadow-sm">
+      🌲 숲속의 비밀 아지트 🐾
+    </div>
+    
+    <!-- 통통 튀는 별명 애니메이션 -->
+    <h1 class="text-5xl sm:text-7xl font-bold font-cute tracking-wider my-4 flex justify-center items-center gap-1 select-none">
+      <span class="inline-block animate-bounceSlow hover:scale-125 transition text-emerald-600 dark:text-emerald-400" style="animation-delay: 0.0s;">김</span>
+      <span class="inline-block animate-bounceSlow hover:scale-125 transition text-emerald-700 dark:text-emerald-300" style="animation-delay: 0.2s;">동</span>
+      <span class="inline-block animate-bounceSlow hover:scale-125 transition text-forest-500 dark:text-emerald-500" style="animation-delay: 0.4s;">현</span>
+      <span class="inline-block animate-bounceSlow text-2xl sm:text-4xl ml-2" style="animation-delay: 0.6s;">🍃</span>
+    </h1>
+
+    <p class="text-base sm:text-lg opacity-80 mt-2">
+      숲속 동물친구들과 함께 놀러온 당신을 환영해요!
+    </p>
+
+    <!-- 방문자 환영 입력창 -->
+    <div class="mt-6 max-w-md mx-auto bg-white/80 dark:bg-zinc-800/80 p-4 rounded-2xl shadow-md backdrop-blur-sm border border-forest-100 dark:border-zinc-700">
+      <label for="visitorName" class="block text-sm font-semibold mb-2">🐻 당신의 이름을 알려주세요!</label>
+      <div class="flex gap-2">
+        <input type="text" id="visitorName" placeholder="예: 아기다람쥐" class="flex-1 px-4 py-2 rounded-xl border border-forest-200 dark:border-zinc-600 dark:bg-zinc-700 focus:outline-none focus:ring-2 focus:ring-emerald-400">
+        <button onclick="greetVisitor()" class="bg-forest-500 hover:bg-forest-600 text-white font-bold px-4 py-2 rounded-xl shadow active:scale-95 transition">인사하기</button>
+      </div>
+      <p id="welcomeMessage" class="mt-3 font-cute text-xl text-emerald-700 dark:text-emerald-300 font-bold hidden"></p>
+    </div>
+  </header>
+
+  <!-- 컨텐츠 메인 영역 -->
+  <main class="w-full max-w-4xl px-4 py-6 flex flex-col gap-10">
+
+    <!-- 카드 뒤집기: 좋아하는 것 3가지 -->
+    <section>
+      <h2 class="text-2xl sm:text-3xl font-bold font-cute mb-4 text-center flex items-center justify-center gap-2">
+        <span>🎁</span> 내가 좋아하는 3가지 (카드를 눌러봐!)
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+
+        <!-- 카드 1: 애니 -->
+        <div class="perspective-1000 h-64 cursor-pointer" onclick="flipCard(this)">
+          <div class="card-inner relative w-full h-full transform-style-3d border-4 border-emerald-300 dark:border-emerald-700 rounded-3xl shadow-lg">
+            <!-- 앞면 -->
+            <div class="absolute inset-0 backface-hidden bg-white dark:bg-zinc-800 flex flex-col items-center justify-center p-4 rounded-2xl">
+              <span class="text-6xl mb-3">🎬</span>
+              <h3 class="text-2xl font-bold font-cute text-forest-600 dark:text-emerald-400">애니메이션</h3>
+              <p class="text-xs text-gray-400 mt-2">클릭하면 이유가 나와요!</p>
+            </div>
+            <!-- 뒷면 -->
+            <div class="absolute inset-0 backface-hidden rotate-y-180 bg-forest-100 dark:bg-emerald-900 flex flex-col items-center justify-center p-5 text-center rounded-2xl">
+              <h4 class="font-bold font-cute text-xl text-forest-800 dark:text-emerald-200 mb-2">왜 좋아할까? 🍿</h4>
+              <p class="text-sm leading-relaxed">
+                현실을 잊고 또 다른 마법 같은 세계관 속으로 입덕하는 순간이 너무 짜릿하니까! 숲속 팝콘 준비 완료!
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 카드 2: 노래 -->
+        <div class="perspective-1000 h-64 cursor-pointer" onclick="flipCard(this)">
+          <div class="card-inner relative w-full h-full transform-style-3d border-4 border-emerald-300 dark:border-emerald-700 rounded-3xl shadow-lg">
+            <!-- 앞면 -->
+            <div class="absolute inset-0 backface-hidden bg-white dark:bg-zinc-800 flex flex-col items-center justify-center p-4 rounded-2xl">
+              <span class="text-6xl mb-3">🎧</span>
+              <h3 class="text-2xl font-bold font-cute text-forest-600 dark:text-emerald-400">음악 듣기</h3>
+              <p class="text-xs text-gray-400 mt-2">클릭하면 이유가 나와요!</p>
+            </div>
+            <!-- 뒷면 -->
+            <div class="absolute inset-0 backface-hidden rotate-y-180 bg-forest-100 dark:bg-emerald-900 flex flex-col items-center justify-center p-5 text-center rounded-2xl">
+              <h4 class="font-bold font-cute text-xl text-forest-800 dark:text-emerald-200 mb-2">왜 좋아할까? 🎶</h4>
+              <p class="text-sm leading-relaxed">
+                이어폰 딱 끼는 순간 내가 숲속 뮤직비디오 주인공! 신나는 멜로디면 혼자 둠칫둠칫 댄스 파티 가능 🕺
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 카드 3: 게임 -->
+        <div class="perspective-1000 h-64 cursor-pointer" onclick="flipCard(this)">
+          <div class="card-inner relative w-full h-full transform-style-3d border-4 border-emerald-300 dark:border-emerald-700 rounded-3xl shadow-lg">
+            <!-- 앞면 -->
+            <div class="absolute inset-0 backface-hidden bg-white dark:bg-zinc-800 flex flex-col items-center justify-center p-4 rounded-2xl">
+              <span class="text-6xl mb-3">🎮</span>
+              <h3 class="text-2xl font-bold font-cute text-forest-600 dark:text-emerald-400">게임 하기</h3>
+              <p class="text-xs text-gray-400 mt-2">클릭하면 이유가 나와요!</p>
+            </div>
+            <!-- 뒷면 -->
+            <div class="absolute inset-0 backface-hidden rotate-y-180 bg-forest-100 dark:bg-emerald-900 flex flex-col items-center justify-center p-5 text-center rounded-2xl">
+              <h4 class="font-bold font-cute text-xl text-forest-800 dark:text-emerald-200 mb-2">왜 좋아할까? 🏆</h4>
+              <p class="text-sm leading-relaxed">
+                화면 속 세상을 컨트롤하는 갓겜마스터가 되는 느낌! 1승 올렸을 때 그 쾌감은 참을 수 없지!
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- OX 퀴즈 섹션 -->
+    <section class="bg-white dark:bg-zinc-800 p-6 sm:p-8 rounded-3xl wood-card border-2 border-forest-100 dark:border-zinc-700 relative overflow-hidden">
+      <h2 class="text-2xl sm:text-3xl font-bold font-cute text-center mb-4 flex items-center justify-center gap-2">
+        <span>❓</span> 동현이 맞춤 OX 퀴즈
+      </h2>
+      <div class="text-center">
+        <p class="text-lg sm:text-xl font-semibold mb-6">
+          "김동현은 <span class="text-pink-500 font-bold underline decoration-wavy">단간론파</span>를 제일 좋아한다!"
+        </p>
+        <div class="flex justify-center gap-6 mb-4">
+          <button onclick="checkQuiz('O')" class="w-24 h-24 text-4xl font-extrabold bg-emerald-100 dark:bg-emerald-900/60 text-emerald-600 dark:text-emerald-300 rounded-2xl hover:bg-emerald-500 hover:text-white transition transform hover:scale-110 active:scale-95 shadow-md flex items-center justify-center">O</button>
+          <button onclick="checkQuiz('X')" class="w-24 h-24 text-4xl font-extrabold bg-rose-100 dark:bg-rose-900/60 text-rose-600 dark:text-rose-300 rounded-2xl hover:bg-rose-500 hover:text-white transition transform hover:scale-110 active:scale-95 shadow-md flex items-center justify-center">X</button>
+        </div>
+        <p id="quizResult" class="font-cute text-2xl font-bold h-8 transition-all duration-300"></p>
+      </div>
+      <!-- 꽃가루/축하 효과 레이어 -->
+      <div id="confettiContainer" class="pointer-events-none absolute inset-0 overflow-hidden"></div>
+    </section>
+
+    <!-- 오늘의 운세 뽑기 -->
+    <section class="bg-emerald-100/70 dark:bg-zinc-800/90 p-6 sm:p-8 rounded-3xl text-center border-2 border-emerald-200 dark:border-zinc-700">
+      <h2 class="text-2xl sm:text-3xl font-bold font-cute mb-2 flex items-center justify-center gap-2">
+        <span>🔮</span> 숲속 다람쥐의 오늘의 운세
+      </h2>
+      <p class="text-xs sm:text-sm text-forest-700 dark:text-emerald-300 mb-5">오늘 당신에게 일어날 행운은 과연 무엇일까요?</p>
+      
+      <div class="min-h-[90px] flex items-center justify-center mb-5 bg-white dark:bg-zinc-900 rounded-2xl p-4 shadow-inner">
+        <p id="fortuneResult" class="font-cute text-xl sm:text-2xl font-bold text-forest-800 dark:text-emerald-200">
+          버튼을 눌러 오늘의 숲속 운세를 뽑아보세요!
+        </p>
+      </div>
+
+      <button onclick="getFortune()" class="bg-forest-600 hover:bg-forest-700 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl transition transform active:scale-95 font-cute text-xl">
+        🌰 운세 뽑기!
+      </button>
+    </section>
+
+    <!-- 10초 도토리 수집 클릭 미니게임 -->
+    <section class="bg-amber-50 dark:bg-zinc-800/70 p-6 sm:p-8 rounded-3xl border-2 border-amber-200 dark:border-zinc-700 text-center">
+      <h2 class="text-2xl sm:text-3xl font-bold font-cute mb-2 flex items-center justify-center gap-2">
+        <span>🐿️</span> 10초 도토리 줍기 미니게임
+      </h2>
+      <p class="text-sm opacity-80 mb-4">10초 동안 버튼을 마구 눌러 도토리를 최대한 많이 수집하세요!</p>
+
+      <div class="flex justify-center gap-8 text-lg font-bold mb-4">
+        <div>남은 시간: <span id="gameTimer" class="text-emerald-600 dark:text-emerald-400 text-2xl font-mono">10</span>초</div>
+        <div>도토리 개수: <span id="clickCount" class="text-amber-600 dark:text-amber-400 text-2xl font-mono">0</span>개</div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+        <button id="gameStartBtn" onclick="startGame()" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-6 rounded-xl shadow transition active:scale-95">
+          게임 시작!
+        </button>
+        <button id="clickBtn" onclick="countClick()" disabled class="bg-amber-500 hover:bg-amber-600 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-bold py-4 px-10 rounded-2xl shadow-lg transition active:scale-90 text-xl font-cute">
+          🌰 도토리 줍기!
+        </button>
+      </div>
+      <p id="gameResult" class="font-cute text-2xl font-bold mt-4 text-emerald-700 dark:text-emerald-300 min-h-[32px]"></p>
+    </section>
+
+  </main>
+
+  <!-- 푸터 -->
+  <footer class="w-full text-center py-6 text-sm opacity-60">
+    <p>🌲 ⓒ 김동현 숲속 아지트 | 방문해 주셔서 감사합니다! 🐾</p>
+  </footer>
+
+  <script>
+    /* ==========================================
+       1. 마우스 반짝이 트레일 이펙트 (Sparkle)
+       ========================================== */
+    const sparkleEmojis = ['✨', '🍃', '🌸', '⭐', '🌰', '🌿'];
+    document.addEventListener('mousemove', (e) => {
+      // 적절한 생성을 위한 가벼운 확률 처리
+      if (Math.random() > 0.4) return;
+
+      const sparkle = document.createElement('div');
+      sparkle.className = 'sparkle-particle';
+      sparkle.innerText = sparkleEmojis[Math.floor(Math.random() * sparkleEmojis.length)];
+      sparkle.style.left = `${e.pageX + (Math.random() * 10 - 5)}px`;
+      sparkle.style.top = `${e.pageY + (Math.random() * 10 - 5)}px`;
+      
+      document.body.appendChild(sparkle);
+
+      setTimeout(() => {
+        sparkle.remove();
+      }, 700);
+    });
+
+    /* ==========================================
+       2. 다크 / 라이트 모드 토글
+       ========================================== */
+    const themeToggleBtn = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+
+    themeToggleBtn.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+      const isDark = document.documentElement.classList.contains('dark');
+      themeIcon.innerText = isDark ? '☀️' : '🌙';
+    });
+
+    /* ==========================================
+       3. 방문자 환영 인사
+       ========================================== */
+    function greetVisitor() {
+      const nameInput = document.getElementById('visitorName');
+      const welcomeMsg = document.getElementById('welcomeMessage');
+      const name = nameInput.value.trim();
+
+      if (name) {
+        welcomeMsg.innerText = `🌲 안녕, ${name}! 숲속에 온 걸 환영해! 나와 같이 놀자 🐻✨`;
+        welcomeMsg.classList.remove('hidden');
+      } else {
+        welcomeMsg.innerText = `🐾 이름을 적어주면 더 반갑게 인사해 줄게!`;
+        welcomeMsg.classList.remove('hidden');
+      }
+    }
+
+    /* ==========================================
+       4. 카드 뒤집기
+       ========================================== */
+    function flipCard(cardContainer) {
+      const cardInner = cardContainer.querySelector('.card-inner');
+      cardInner.classList.toggle('rotate-y-180');
+    }
+
+    /* ==========================================
+       5. OX 퀴즈 처리
+       ========================================== */
+    function checkQuiz(userAnswer) {
+      const resultElem = document.getElementById('quizResult');
+      const container = document.getElementById('confettiContainer');
+      container.innerHTML = '';
+
+      if (userAnswer === 'O') {
+        resultElem.innerText = '🎉 딩동댕! 정답입니다! 단간론파에 완전 진심이에요! 🥳';
+        resultElem.className = 'font-cute text-2xl font-bold h-8 text-emerald-600 dark:text-emerald-400 animate-bounce';
+        createConfetti();
+      } else {
+        resultElem.innerText = '😭 땡! 아쉬워요... 단간론파가 최애랍니다! 다시 도전해보세요 곰!';
+        resultElem.className = 'font-cute text-2xl font-bold h-8 text-rose-500 dark:text-rose-400';
+      }
+    }
+
+    // 정답 축하 이펙트
+    function createConfetti() {
+      const container = document.getElementById('confettiContainer');
+      const items = ['🎉', '✨', '🐻', '🌸', '💖', '🎈'];
+      for (let i = 0; i < 25; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'absolute text-xl select-none';
+        confetti.innerText = items[Math.floor(Math.random() * items.length)];
+        confetti.style.left = Math.random() * 100 + '%';
+        confetti.style.top = '-10%';
+        confetti.style.animation = `confetti ${1.5 + Math.random()}s ease-out forwards`;
+        confetti.style.animationDelay = `${Math.random() * 0.3}s`;
+        container.appendChild(confetti);
+      }
+    }
+
+    /* ==========================================
+       6. 오늘의 운세 (10개 이상)
+       ========================================== */
+    const fortunes = [
+      "🌰 오늘 길가에서 아주 맛있는 간식을 발견할 운세입니다!",
+      "🎧 들으시는 노래마다 대박 흥이 차오르는 신나는 하루가 될 거예요!",
+      "🎮 오늘 플레이하는 모든 게임에서 승리(연승)를 거둡니다!",
+      "🦊 숲속 여우가 행운을 전해줍니다. 뜻밖의 반가운 소식이 올 지도?!",
+      "✨ 애니메이션 속 주인공처럼 머릿속 상상력이 샘솟는 날입니다!",
+      "🍀 행운의 4엽 클로버를 발견할 만큼 기분 좋은 일만 가득할 거예요.",
+      "🍰 달콤한 디저트가 피로를 싹 풀어주는 기분 좋은 하루!",
+      "🐻 숲속 아기곰이 귀여운 춤으로 당신의 하루를 응원합니다!",
+      "🎯 무심코 한 선택이 아주 좋은 결과를 가져올 멋진 운세입니다.",
+      "⭐ 생각지도 못한 뜻밖의 칭찬을 듣게 되는 꿀같은 하루!",
+      "🌈 오늘 당신의 하루에는 예쁜 무지개가 뜰 거예요!"
+    ];
+
+    function getFortune() {
+      const fortuneElem = document.getElementById('fortuneResult');
+      const randomIndex = Math.floor(Math.random() * fortunes.length);
+      
+      // 살짝 통통 튀는 애니메이션 효과
+      fortuneElem.style.opacity = '0';
+      setTimeout(() => {
+        fortuneElem.innerText = fortunes[randomIndex];
+        fortuneElem.style.opacity = '1';
+      }, 150);
+    }
+
+    /* ==========================================
+       7. 10초 도토리 줍기 미니게임
+       ========================================== */
+    let timer = 10;
+    let clicks = 0;
+    let gameInterval = null;
+    let isGaming = false;
+
+    function startGame() {
+      if (isGaming) return;
+
+      isGaming = true;
+      clicks = 0;
+      timer = 10;
+
+      document.getElementById('clickCount').innerText = clicks;
+      document.getElementById('gameTimer').innerText = timer;
+      document.getElementById('gameResult').innerText = '';
+
+      document.getElementById('gameStartBtn').disabled = true;
+      document.getElementById('gameStartBtn').classList.add('opacity-50', 'cursor-not-allowed');
+      
+      const clickBtn = document.getElementById('clickBtn');
+      clickBtn.disabled = false;
+      clickBtn.focus();
+
+      gameInterval = setInterval(() => {
+        timer--;
+        document.getElementById('gameTimer').innerText = timer;
+
+        if (timer <= 0) {
+          endGame();
+        }
+      }, 1000);
+    }
+
+    function countClick() {
+      if (!isGaming) return;
+      clicks++;
+      document.getElementById('clickCount').innerText = clicks;
+    }
+
+    function endGame() {
+      clearInterval(gameInterval);
+      isGaming = false;
+
+      const clickBtn = document.getElementById('clickBtn');
+      clickBtn.disabled = true;
+
+      const startBtn = document.getElementById('gameStartBtn');
+      startBtn.disabled = false;
+      startBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+
+      const resultElem = document.getElementById('gameResult');
+      let title = '';
+
+      if (clicks >= 50) {
+        title = '👑 숲속 전설의 도토리 왕!';
+      } else if (clicks >= 30) {
+        title = '🐿️ 부지런한 다람쥐 신동!';
+      } else if (clicks >= 15) {
+        title = '🐻 귀여운 숲속 아기곰!';
+      } else {
+        title = '느긋한 달팽이 친구!';
+      }
+
+      resultElem.innerText = `⏱️ 시간 종료! 총 ${clicks}개의 도토리를 수집했어요! (${title})`;
+    }
+  </script>
+</body>
+</html>
