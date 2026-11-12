@@ -153,7 +153,7 @@
             <div class="absolute inset-0 backface-hidden rotate-y-180 bg-forest-100 dark:bg-emerald-900 flex flex-col items-center justify-center p-5 text-center rounded-2xl">
               <h4 class="font-bold font-cute text-xl text-forest-800 dark:text-emerald-200 mb-2">왜 좋아할까? 🍿</h4>
               <p class="text-sm leading-relaxed">
-                현실을 잊고 또 다른 마법 같은 세계관 속으로 입덕하는 순간이 너무 짜릿하니까! 숲속 팝콘 준비 완료!
+                현실에선 할 수 없는 일이 일어나니까 재밋어요..예쁜 캐릭터도 너무 많고
               </p>
             </div>
           </div>
@@ -172,7 +172,7 @@
             <div class="absolute inset-0 backface-hidden rotate-y-180 bg-forest-100 dark:bg-emerald-900 flex flex-col items-center justify-center p-5 text-center rounded-2xl">
               <h4 class="font-bold font-cute text-xl text-forest-800 dark:text-emerald-200 mb-2">왜 좋아할까? 🎶</h4>
               <p class="text-sm leading-relaxed">
-                이어폰 딱 끼는 순간 내가 숲속 뮤직비디오 주인공! 신나는 멜로디면 혼자 둠칫둠칫 댄스 파티 가능 🕺
+                단간론파,케이온,앙스타,보카로,일본록 들으면 진짜 극락임 내 애플뮤직 플리 공유해주고싶다
               </p>
             </div>
           </div>
@@ -191,7 +191,7 @@
             <div class="absolute inset-0 backface-hidden rotate-y-180 bg-forest-100 dark:bg-emerald-900 flex flex-col items-center justify-center p-5 text-center rounded-2xl">
               <h4 class="font-bold font-cute text-xl text-forest-800 dark:text-emerald-200 mb-2">왜 좋아할까? 🏆</h4>
               <p class="text-sm leading-relaxed">
-                화면 속 세상을 컨트롤하는 갓겜마스터가 되는 느낌! 1승 올렸을 때 그 쾌감은 참을 수 없지!
+                단간론파에서 데이트할 수 있으니까..게임은 최고
               </p>
             </div>
           </div>
@@ -222,13 +222,13 @@
     <!-- 오늘의 운세 뽑기 -->
     <section class="bg-emerald-100/70 dark:bg-zinc-800/90 p-6 sm:p-8 rounded-3xl text-center border-2 border-emerald-200 dark:border-zinc-700">
       <h2 class="text-2xl sm:text-3xl font-bold font-cute mb-2 flex items-center justify-center gap-2">
-        <span>🔮</span> 숲속 다람쥐의 오늘의 운세
+        <span>🔮</span> 숲속 코마에다의 오늘의 운세
       </h2>
       <p class="text-xs sm:text-sm text-forest-700 dark:text-emerald-300 mb-5">오늘 당신에게 일어날 행운은 과연 무엇일까요?</p>
       
       <div class="min-h-[90px] flex items-center justify-center mb-5 bg-white dark:bg-zinc-900 rounded-2xl p-4 shadow-inner">
         <p id="fortuneResult" class="font-cute text-xl sm:text-2xl font-bold text-forest-800 dark:text-emerald-200">
-          버튼을 눌러 오늘의 숲속 운세를 뽑아보세요!
+          버튼을 눌러 오늘의 운세를 뽑아보세요!
         </p>
       </div>
 
@@ -240,13 +240,13 @@
     <!-- 10초 도토리 수집 클릭 미니게임 -->
     <section class="bg-amber-50 dark:bg-zinc-800/70 p-6 sm:p-8 rounded-3xl border-2 border-amber-200 dark:border-zinc-700 text-center">
       <h2 class="text-2xl sm:text-3xl font-bold font-cute mb-2 flex items-center justify-center gap-2">
-        <span>🐿️</span> 10초 도토리 줍기 미니게임
+        <span>🐿️</span> 10초 희망 줍기 미니게임
       </h2>
-      <p class="text-sm opacity-80 mb-4">10초 동안 버튼을 마구 눌러 도토리를 최대한 많이 수집하세요!</p>
+      <p class="text-sm opacity-80 mb-4">10초 동안 버튼을 마구 눌러 희망을 최대한 많이 수집하세요!</p>
 
       <div class="flex justify-center gap-8 text-lg font-bold mb-4">
         <div>남은 시간: <span id="gameTimer" class="text-emerald-600 dark:text-emerald-400 text-2xl font-mono">10</span>초</div>
-        <div>도토리 개수: <span id="clickCount" class="text-amber-600 dark:text-amber-400 text-2xl font-mono">0</span>개</div>
+        <div>희망 개수: <span id="clickCount" class="text-amber-600 dark:text-amber-400 text-2xl font-mono">0</span>개</div>
       </div>
 
       <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
@@ -254,7 +254,7 @@
           게임 시작!
         </button>
         <button id="clickBtn" onclick="countClick()" disabled class="bg-amber-500 hover:bg-amber-600 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-bold py-4 px-10 rounded-2xl shadow-lg transition active:scale-90 text-xl font-cute">
-          🌰 도토리 줍기!
+          🌰 희망 줍기!
         </button>
       </div>
       <p id="gameResult" class="font-cute text-2xl font-bold mt-4 text-emerald-700 dark:text-emerald-300 min-h-[32px]"></p>
@@ -310,7 +310,7 @@
       const name = nameInput.value.trim();
 
       if (name) {
-        welcomeMsg.innerText = `🌲 안녕, ${name}! 숲속에 온 걸 환영해! 나와 같이 놀자 🐻✨`;
+        welcomeMsg.innerText = `🌲 안녕, ${name}! 키보가미네 학원에 온 걸 환영해! 나와 같이 놀자 🐻✨`;
         welcomeMsg.classList.remove('hidden');
       } else {
         welcomeMsg.innerText = `🐾 이름을 적어주면 더 반갑게 인사해 줄게!`;
@@ -335,11 +335,11 @@
       container.innerHTML = '';
 
       if (userAnswer === 'O') {
-        resultElem.innerText = '🎉 딩동댕! 정답입니다! 단간론파에 완전 진심이에요! 🥳';
+        resultElem.innerText = '🎉 딩동댕! 정답입니다! 단간론파에 완전 진심이에요! 11037 11037 11037!!!!!!!🥳';
         resultElem.className = 'font-cute text-2xl font-bold h-8 text-emerald-600 dark:text-emerald-400 animate-bounce';
         createConfetti();
       } else {
-        resultElem.innerText = '😭 땡! 아쉬워요... 단간론파가 최애랍니다! 다시 도전해보세요 곰!';
+        resultElem.innerText = '😭 땡! 엥...; 단간론파가 최애랍니다! 나가주세요 그냥';
         resultElem.className = 'font-cute text-2xl font-bold h-8 text-rose-500 dark:text-rose-400';
       }
     }
@@ -390,7 +390,7 @@
     }
 
     /* ==========================================
-       7. 10초 도토리 줍기 미니게임
+       7. 10초 희망 줍기 미니게임
        ========================================== */
     let timer = 10;
     let clicks = 0;
@@ -446,16 +446,16 @@
       let title = '';
 
       if (clicks >= 50) {
-        title = '👑 숲속 전설의 도토리 왕!';
+        title = '👑 초고교급 클리커!';
       } else if (clicks >= 30) {
-        title = '🐿️ 부지런한 다람쥐 신동!';
+        title = '🐿️ 당신은 섹시한 사람';
       } else if (clicks >= 15) {
-        title = '🐻 귀여운 숲속 아기곰!';
+        title = '🐻 우리 외할머니급';
       } else {
-        title = '느긋한 달팽이 친구!';
+        title = '예비학과';
       }
 
-      resultElem.innerText = `⏱️ 시간 종료! 총 ${clicks}개의 도토리를 수집했어요! (${title})`;
+      resultElem.innerText = `⏱️ 시간 종료! 총 ${clicks}개의 희망을 수집했어요! (${title})`;
     }
   </script>
 <!-- ▼ 방명록·OX 투표 (4차시) ▼ -->
